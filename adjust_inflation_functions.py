@@ -2,6 +2,8 @@ import pandas as pd
 
 def adjust_BRL_inflation(dates:str, values:float, present_date:str=df_daily_ipca['Date'].max()):
 
+    df_daily_ipca = pd.read_csv('BRL Daily Inflation.csv')
+
     df = pd.DataFrame(columns=['Date', 'Value'])
     df['Date'] = dates
     df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
