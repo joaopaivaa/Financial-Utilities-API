@@ -14,3 +14,14 @@ def brl_inflation_adjust(data: InflationRequest):
     df = adjust_BRL_inflation(dates, values, present_date)
 
     return df
+
+@router.post("/currency_conversion")
+def currency_conversion(data: CurrencyConversionRequest):
+
+    dates = data.dates
+    values = data.values
+    original_currency = data.original_currency
+
+    df = currency_conversion(dates, values, original_currency)
+
+    return df
