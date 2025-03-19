@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from base_model import InflationRequest
+from base_model import InflationRequest, CurrencyConversionRequest
 from adjust_inflation_functions import adjust_BRL_inflation
+from currency_conversion import currency_conversion
 
 router = APIRouter()
 
