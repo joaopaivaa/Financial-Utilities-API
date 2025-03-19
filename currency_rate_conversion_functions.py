@@ -1,7 +1,9 @@
 import pandas as pd
 from typing import List
 
-def rate_conversion(dates: List[str], values: List[float], original_currency: str):
+def currency_rate_conversion(dates: List[str], values: List[float], original_currency: str):
+
+    df_currencies = pd.read_csv('Currencies Rate.csv')
 
     df = pd.DataFrame({'Date': dates, original_currency: values})
     
