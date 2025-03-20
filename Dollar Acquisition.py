@@ -74,4 +74,4 @@ for i in df.index:
     df_date['Daily Inflation'] = ((1 + df['Monthly Inflation'].values[i])**(1/df['Number of Days'].values[i])) - 1
     df_daily_inflation = pd.concat([df_daily_inflation, df_date], ignore_index=True)
 
-df_daily_inflation.to_csv('Dollar Daily Inflation.csv', index=False)
+df_daily_inflation.to_csv('C:\\Users\\e-joaom\\Downloads\\Dollar Daily Inflation.csv', index=False, encoding='utf-8')
