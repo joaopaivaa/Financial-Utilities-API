@@ -1,10 +1,19 @@
 import pandas as pd
 from typing import Literal
+import os
 
-def adjust_inflation(dates:str, values:float, currency:Literal['BRL'], present_date:str=None):
+def adjust_inflation(dates:str, values:float, currency:Literal['BRL','GBP','Dollar'], present_date:str=None):
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
     if currency == 'BRL':
-        df_daily_ipca = pd.read_csv('C:\\Users\\e-joaom\\Downloads\\api\\Inflation-Rate-Update-API\\BRL Daily Inflation.csv')
+        df_daily_ipca = pd.read_csv(BASE_DIR + '\BRL Daily Inflation.csv')
+
+    elif currency == 'Dollar':
+        df_daily_ipca = pd.read_csv(BASE_DIR + '\Dollar Daily Inflation.csv')
+
+    elif currency == 'GBP':
+        df_daily_ipca = pd.read_csv(BASE_DIR + '\GBP Daily Inflation.csv')
 
     df_daily_ipca['Date'] = pd.to_datetime(df_daily_ipca['Date'])
 
