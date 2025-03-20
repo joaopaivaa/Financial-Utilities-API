@@ -2,6 +2,9 @@ import requests
 import json
 import pandas as pd
 from datetime import datetime
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Acquisition ################################################################################################
 
@@ -59,13 +62,16 @@ df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for
 
 df = df[df['Date'] >= pd.to_datetime('01/01/1967', format='%d/%m/%Y')].reset_index(drop=True)
 
-df_days_per_month = pd.read_csv("C:\\Users\\e-joaom\\Downloads\\months_days.csv")
+df_days_per_month = pd.read_csv(BASE_DIR + '\months_days.csv')
 
 df = df.merge(df_days_per_month, on='Month Number', how='left')
 
-df[(df['Month'] == 'February') &
-   (df['Date'].dt.year.astype(int) % 4 == 0) &
-   ((df['Date'].dt.year.astype(int) % 100 != 0) | (df['Date'].dt.year.astype(int) % 400 == 0))]['Number of Days'] = 29
+df.loc[
+    (df['Month'] == 'February') &
+    (df['Date'].dt.year % 4 == 0) &
+    ((df['Date'].dt.year % 100 != 0) | (df['Date'].dt.year % 400 == 0)),
+    'Number of Days'
+] = 29
 
 df_daily_inflation = pd.DataFrame(columns=['Date', 'Daily Inflation'])
 for i in df.index:
@@ -74,4 +80,4 @@ for i in df.index:
     df_date['Daily Inflation'] = ((1 + df['Monthly Inflation'].values[i])**(1/df['Number of Days'].values[i])) - 1
     df_daily_inflation = pd.concat([df_daily_inflation, df_date], ignore_index=True)
 
-df_daily_inflation.to_csv('C:\\Users\\e-joaom\\Downloads\\Dollar Daily Inflation.csv', index=False, encoding='utf-8')
+df_daily_inflation.to_csv(BASE_DIR + '\Dollar Daily Inflation.csv', index=False, encoding='utf-8')
