@@ -15,3 +15,9 @@ class AmortizationRequest(BaseModel):
     principal : float = Field(description='Principal', default=None)
     rate: float = Field(description='Rate', default=None)
     periods: int = Field(description='Time Periods', default=None)
+
+class InterestRequest(BaseModel):
+    amount: float = Field(description='Total Amount', default=None)
+    principal: float = Field(description='Principal', default=None)
+    rate: float = Field(description='Interest Rate', default=None)
+    time: int = Field(description='Time Periods', default=None)
