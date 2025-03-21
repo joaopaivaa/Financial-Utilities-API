@@ -10,13 +10,18 @@ def test_BRL_adjust_inflation_route():
         'dates': ['2020/01/01', '2020/02/01', '2020/03/01', '2020/04/01', '2020/05/01'],
         'values': [100, 150, 200, 250, 300],
         'currency': 'BRL',
-        'present_date': '2025/03/20'
+        'present_date': '2025/01/01'
     }
     response = client.post('/adjust_inflation', json=data)
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
-    assert response_json == response_json
+    assert 'Date' in response_json
+    assert len(response_json['Date']) > 0
+    assert 'Value' in response_json
+    assert len(response_json['Value']) > 0
+    assert 'Accumulated Inflation (%)' in response_json
+    assert len(response_json['Accumulated Inflation (%)']) > 0
 
 def test_GBP_adjust_inflation_route():
 
@@ -24,13 +29,18 @@ def test_GBP_adjust_inflation_route():
         'dates': ['2020/01/01', '2020/02/01', '2020/03/01', '2020/04/01', '2020/05/01'],
         'values': [100, 150, 200, 250, 300],
         'currency': 'GBP',
-        'present_date': '2025/03/20'
+        'present_date': '2025/01/01'
     }
     response = client.post('/adjust_inflation', json=data)
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
-    assert response_json == response_json
+    assert 'Date' in response_json
+    assert len(response_json['Date']) > 0
+    assert 'Value' in response_json
+    assert len(response_json['Value']) > 0
+    assert 'Accumulated Inflation (%)' in response_json
+    assert len(response_json['Accumulated Inflation (%)']) > 0
 
 def test_Dollar_adjust_inflation_route():
 
@@ -38,10 +48,15 @@ def test_Dollar_adjust_inflation_route():
         'dates': ['2020/01/01', '2020/02/01', '2020/03/01', '2020/04/01', '2020/05/01'],
         'values': [100, 150, 200, 250, 300],
         'currency': 'Dollar',
-        'present_date': '2025/03/20'
+        'present_date': '2025/01/01'
     }
     response = client.post('/adjust_inflation', json=data)
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
-    assert response_json == response_json
+    assert 'Date' in response_json
+    assert len(response_json['Date']) > 0
+    assert 'Value' in response_json
+    assert len(response_json['Value']) > 0
+    assert 'Accumulated Inflation (%)' in response_json
+    assert len(response_json['Accumulated Inflation (%)']) > 0
