@@ -10,9 +10,9 @@ response = requests.get(url)
 data = response.json()
 
 df = pd.DataFrame(data)
-df.rename(columns={'data': 'Date', 'valor': 'Inflation Value'}, inplace=True)
+df.rename(columns={'data': 'Date', 'valor': 'Monthly Inflation'}, inplace=True)
 df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
-df['Inflation Value'] = pd.to_numeric(df['Inflation Value']) / 100
+df['Monthly Inflation'] = pd.to_numeric(df['Monthly Inflation']) / 100
 df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for index in df.index]
 
 df = df[df['Date'] >= pd.to_datetime('01/07/1994', format='%d/%m/%Y')].reset_index(drop=True)
@@ -28,11 +28,11 @@ df.loc[
     'Number of Days'
 ] = 29
 
-df_daily_ipca = pd.DataFrame(columns=['Date', 'Inflation Value'])
+df_daily_ipca = pd.DataFrame(columns=['Date', 'Daily Inflation'])
 for i in df.index:
-    df_date = pd.DataFrame(columns=['Date', 'Inflation Value'])
+    df_date = pd.DataFrame(columns=['Date', 'Daily Inflation'])
     df_date['Date'] = pd.date_range(start=df['Date'].values[i], periods=df['Number of Days'].values[i])
-    df_date['Inflation Value'] = ((1 + df['Inflation Value'].values[i])**(1/df['Number of Days'].values[i])) - 1
+    df_date['Daily Inflation'] = ((1 + df['Monthly Inflation'].values[i])**(1/df['Number of Days'].values[i])) - 1
     df_daily_ipca = pd.concat([df_daily_ipca, df_date], ignore_index=True)
 
 df_daily_ipca.to_csv(BASE_DIR + '\BRL Daily Inflation.csv', index=False)
