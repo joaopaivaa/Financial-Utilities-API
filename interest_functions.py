@@ -2,19 +2,19 @@ def simple_interest(amount: float = None, principal: float = None, rate: float =
 
     if amount is None:
         amount = principal + (principal * rate * time)
-        return amount
+        return {'amount': amount}
     
     elif principal is None:
-        principal = (amount - principal) / (rate * time)
-        return principal
+        principal = amount / (1 + rate * time)
+        return {'principal': principal}
     
     elif rate is None:
         rate = (amount - principal) / (principal * time)
-        return rate
+        return {'rate': rate}
     
     elif time is None:
         time = (amount - principal) / (rate * principal)
-        return time
+        return {'time': time}
 
 
 def compound_interest(amount: float = None, principal: float = None, rate: float = None, time: int = None):
@@ -23,19 +23,19 @@ def compound_interest(amount: float = None, principal: float = None, rate: float
 
     if amount is None:
         amount = principal * ((1 + rate) ** time)
-        return amount
+        return {'amount': amount}
 
-    if principal is None:
+    elif principal is None:
         principal = amount / ((1 + rate) ** time)
-        return principal
+        return {'principal': principal}
 
-    if rate is None:
+    elif rate is None:
         rate = (amount / principal) ** (1 / time) - 1
-        return rate
+        return {'rate': rate}
 
-    if time is None:
+    elif time is None:
         time = math.log(amount / principal) / math.log(1 + rate)
-        return time
+        return {'time': time}
     
 
 def present_value(future_value: float = None, projected_inflation_rate: float = None, time: float = None):
