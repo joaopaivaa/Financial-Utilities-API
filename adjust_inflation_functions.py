@@ -31,7 +31,7 @@ def adjust_inflation(dates:list[str], values:list[float], currency:Literal['BRL'
     if present_date <= df_daily_ipca_to_present_date['Date'].max():
         df = df[(df['Date'] >= df_daily_ipca_to_present_date['Date'].min()) & (df['Date'] < present_date)]
     else:
-        return f'The present date must be less than or equal to {df_daily_ipca_to_present_date['Date'].max().date()}'
+        return f"The present date must be less than or equal to {df_daily_ipca_to_present_date['Date'].max().date()}"
 
     df = df.merge(df_daily_ipca_to_present_date, on='Date', how='left')
     df[f'Adjusted Value - {present_date.date()}'] = round(df['Value'] * (1 + df['Accumulated Inflation (%)']), 2)
