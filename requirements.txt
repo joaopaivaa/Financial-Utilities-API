@@ -1,0 +1,6 @@
+fastapi==0.115.11
+pandas==2.2.3
+pydantic==2.10.6
+Requests==2.32.3
+uvicorn==0.34.0
+yfinance==0.2.55

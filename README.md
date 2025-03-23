@@ -11,7 +11,7 @@ Output:
 - Dataframe: dates, original values, cumulative inflation (%), djusted values. 
 
 
-## Currency Rate Conversion Route (POST) - Receives time series monetary values (Dollar, Euro or Great Britain Pound) and convert it into the other 2 currencies.
+## Currency Rate Conversion Route (POST) - Receives time series monetary values (USD, Euro or Great Britain Pound) and convert it into the other 2 currencies.
 
 Inputs:
 - Column/list of dates.
@@ -19,7 +19,7 @@ Inputs:
 - Original currency as string.
 
 Output:
-- Dataframe: dates, value in Dollar, value in Euro, value in Great Britain Pound.
+- Dataframe: dates, value in USD, value in Euro, value in Great Britain Pound.
 
 ## French and SAC Amortization Calculation Route (POST) - Receives principal, interest rate and number of time periods and calculates its amortization process.
 
