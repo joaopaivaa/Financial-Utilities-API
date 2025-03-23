@@ -4,12 +4,12 @@ from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-df = pd.read_csv(BASE_DIR + '\GBP Monthly Inflation.csv', sep=';')
+df = pd.read_csv(BASE_DIR + '\databases\GBP Monthly Inflation.csv', sep=';')
 
 df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
 df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for index in df.index]
 
-df_days_per_month = pd.read_csv(BASE_DIR + "\months_days.csv")
+df_days_per_month = pd.read_csv(BASE_DIR + "\databases\months_days.csv")
 
 df = df.merge(df_days_per_month, on='Month Number', how='left')
 
@@ -27,4 +27,4 @@ for i in df.index:
     df_date['Daily Inflation'] = ((1 + df['Monthly Inflation'].values[i])**(1/df['Number of Days'].values[i])) - 1
     df_daily_inflation = pd.concat([df_daily_inflation, df_date], ignore_index=True)
 
-df_daily_inflation.to_csv(BASE_DIR + '\GBP Daily Inflation.csv', index=False, encoding='utf-8')
+df_daily_inflation.to_csv(BASE_DIR + '\databases\GBP Daily Inflation.csv', index=False, encoding='utf-8')

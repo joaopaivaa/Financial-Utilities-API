@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-previous_df = pd.read_csv(os.path.join(BASE_DIR, 'Currencies Rate.csv'), sep=';')
+previous_df = pd.read_csv(os.path.join(BASE_DIR, 'databases\Currencies Rate.csv'), sep=';')
 
 previous_date = previous_df.iloc[-1]['Date']
 actual_date = str(pd.to_datetime(datetime.now()).date())
@@ -30,4 +30,4 @@ if not (actual_date in previous_df['Date'].values):
 
     df_currencies = pd.concat([previous_df, df_currencies], ignore_index=True)
 
-    df_currencies.to_csv(os.path.join(BASE_DIR, 'Currencies Rate.csv'), sep=';', index=True)
+    df_currencies.to_csv(os.path.join(BASE_DIR, 'databases\Currencies Rate.csv'), sep=';', index=True)

@@ -17,7 +17,7 @@ df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for
 
 df = df[df['Date'] >= pd.to_datetime('01/07/1994', format='%d/%m/%Y')].reset_index(drop=True)
 
-df_days_per_month = pd.read_csv(BASE_DIR + "\months_days.csv")
+df_days_per_month = pd.read_csv(BASE_DIR + "\databases\months_days.csv")
 
 df = df.merge(df_days_per_month, on='Month Number', how='left')
 
@@ -35,4 +35,4 @@ for i in df.index:
     df_date['Daily Inflation'] = ((1 + df['Monthly Inflation'].values[i])**(1/df['Number of Days'].values[i])) - 1
     df_daily_ipca = pd.concat([df_daily_ipca, df_date], ignore_index=True)
 
-df_daily_ipca.to_csv(BASE_DIR + '\BRL Daily Inflation.csv', index=False)
+df_daily_ipca.to_csv(BASE_DIR + '\databases\BRL Daily Inflation.csv', index=False)

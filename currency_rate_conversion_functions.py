@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def currency_rate_conversion(dates: List[str], values: List[float], original_currency: str):
 
-    df_currencies = pd.read_csv(BASE_DIR + '/Currencies Rate.csv', sep=';')
+    df_currencies = pd.read_csv(BASE_DIR + '/databases/Currencies Rate.csv', sep=';')
     df_currencies['Date'] = pd.to_datetime(df_currencies['Date'])
 
     df = pd.DataFrame({'Date': dates, original_currency: values})

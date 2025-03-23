@@ -7,13 +7,13 @@ def adjust_inflation(dates:list[str], values:list[float], currency:Literal['BRL'
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
     if currency == 'BRL':
-        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}/BRL Daily Inflation.csv')
+        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}/databases/BRL Daily Inflation.csv')
 
     elif currency == 'USD':
-        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}/USD Daily Inflation.csv')
+        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}/databases/USD Daily Inflation.csv')
 
     elif currency == 'GBP':
-        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}/GBP Daily Inflation.csv')
+        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}/databases/GBP Daily Inflation.csv')
 
     df_daily_ipca['Date'] = pd.to_datetime(df_daily_ipca['Date'])
 
