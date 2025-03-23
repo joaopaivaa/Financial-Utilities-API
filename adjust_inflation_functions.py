@@ -2,15 +2,15 @@ import pandas as pd
 from typing import Literal
 import os
 
-def adjust_inflation(dates:list[str], values:list[float], currency:Literal['BRL','GBP','Dollar'], present_date:str=None):
+def adjust_inflation(dates:list[str], values:list[float], currency:Literal['BRL','GBP','USD'], present_date:str=None):
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
     if currency == 'BRL':
         df_daily_ipca = pd.read_csv(rf'{BASE_DIR}\BRL Daily Inflation.csv')
 
-    elif currency == 'Dollar':
-        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}\Dollar Daily Inflation.csv')
+    elif currency == 'USD':
+        df_daily_ipca = pd.read_csv(rf'{BASE_DIR}\USD Daily Inflation.csv')
 
     elif currency == 'GBP':
         df_daily_ipca = pd.read_csv(rf'{BASE_DIR}\GBP Daily Inflation.csv')
