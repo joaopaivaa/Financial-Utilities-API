@@ -1,0 +1,33 @@
+name: Testar API FastAPI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-fastapi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Instalar dependências
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio httpx
+
+      - name: Rodar testes
+        run: |
+          source venv/bin/activate
+          pytest -v
