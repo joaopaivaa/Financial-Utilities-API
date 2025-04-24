@@ -57,7 +57,7 @@ df = df[["Date", "CPI Value", "Monthly Inflation"]]
 
 # Cleaning ################################################################################################
 
-df['Monthly Inflation'] = pd.to_numeric(df['Monthly Inflation']) / 100
+df['Monthly Inflation'] = round(pd.to_numeric(df['Monthly Inflation']) / 100, 8)
 df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for index in df.index]
 df['Year Number'] = [int(datetime.strftime(df['Date'][index], format='%Y')) for index in df.index]
 
