@@ -1,14 +1,15 @@
 from fastapi.testclient import TestClient
 from main import app
 from fastapi import status
+import pandas as pd
 
 client = TestClient(app)
 
 def test_BRL_adjust_inflation_route():
 
     data = {
-        'dates': ['2020/01/01', '2020/02/01', '2020/03/01', '2020/04/01', '2020/05/01'],
-        'values': [100, 150, 200, 250, 300],
+        'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
+        'values': [100, 100, 100],
         'currency': 'BRL',
         'present_date': '2025/01/01'
     }
@@ -16,18 +17,19 @@ def test_BRL_adjust_inflation_route():
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
-    assert 'Date' in response_json
-    assert len(response_json['Date']) > 0
-    assert 'Value' in response_json
-    assert len(response_json['Value']) > 0
-    assert 'Accumulated Inflation (%)' in response_json
-    assert len(response_json['Accumulated Inflation (%)']) > 0
+
+    df_response = pd.DataFrame(response_json)
+    df_response['Date'] = pd.to_datetime(df_response['Date'])
+
+    assert len(df_response) > 0
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
+
 
 def test_GBP_adjust_inflation_route():
 
     data = {
-        'dates': ['2020/01/01', '2020/02/01', '2020/03/01', '2020/04/01', '2020/05/01'],
-        'values': [100, 150, 200, 250, 300],
+        'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
+        'values': [100, 100, 100],
         'currency': 'GBP',
         'present_date': '2025/01/01'
     }
@@ -35,18 +37,19 @@ def test_GBP_adjust_inflation_route():
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
-    assert 'Date' in response_json
-    assert len(response_json['Date']) > 0
-    assert 'Value' in response_json
-    assert len(response_json['Value']) > 0
-    assert 'Accumulated Inflation (%)' in response_json
-    assert len(response_json['Accumulated Inflation (%)']) > 0
+    
+    df_response = pd.DataFrame(response_json)
+    df_response['Date'] = pd.to_datetime(df_response['Date'])
+
+    assert len(df_response) > 0
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
+
 
 def test_USD_adjust_inflation_route():
 
     data = {
-        'dates': ['2020/01/01', '2020/02/01', '2020/03/01', '2020/04/01', '2020/05/01'],
-        'values': [100, 150, 200, 250, 300],
+        'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
+        'values': [100, 100, 100],
         'currency': 'USD',
         'present_date': '2025/01/01'
     }
@@ -54,9 +57,9 @@ def test_USD_adjust_inflation_route():
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
-    assert 'Date' in response_json
-    assert len(response_json['Date']) > 0
-    assert 'Value' in response_json
-    assert len(response_json['Value']) > 0
-    assert 'Accumulated Inflation (%)' in response_json
-    assert len(response_json['Accumulated Inflation (%)']) > 0
+    
+    df_response = pd.DataFrame(response_json)
+    df_response['Date'] = pd.to_datetime(df_response['Date'])
+
+    assert len(df_response) > 0
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
