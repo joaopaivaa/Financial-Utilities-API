@@ -1,7 +1,7 @@
 import yfinance as yf
 import pandas as pd
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

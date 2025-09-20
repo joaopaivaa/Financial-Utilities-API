@@ -13,10 +13,10 @@ def currency_rate_conversion(dates: List[str], values: List[float], original_cur
     df['Date'] = pd.to_datetime(df['Date'])
 
     df = df.merge(df_currencies, on='Date', how='left')
-    for i in df.index:
-        if (i > 0) and all(pd.isna([df.iloc[i, column_n] for column_n in range(2,9)])) and (not any(pd.isna([df.iloc[i-1, column_n] for column_n in range(2,9)]))):
-            for column_n in range(2,9):
-                df.iloc[i, column_n] = df.iloc[i-1, column_n]
+    # for i in df.index:
+    #     if (i > 0) and all(pd.isna([df.iloc[i, column_n] for column_n in range(2,9)])) and (not any(pd.isna([df.iloc[i-1, column_n] for column_n in range(2,9)]))):
+    #         for column_n in range(2,9):
+    #             df.iloc[i, column_n] = df.iloc[i-1, column_n]
     
     if original_currency == 'GBP':
         df['USD'] = df[original_currency].astype(float) * df['GBPUSD=X'].astype(float)
