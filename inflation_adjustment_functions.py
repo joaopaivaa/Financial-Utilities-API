@@ -3,7 +3,7 @@ from typing import Literal
 import os
 from datetime import datetime
 
-def adjust_inflation(dates:list[str], values:list[float], currency:Literal['BRL','GBP','USD'], present_date:str=None):
+def inflation_adjustment(dates:list[str], values:list[float], currency:Literal['BRL','GBP','USD'], present_date:str=None):
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

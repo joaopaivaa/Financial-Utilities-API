@@ -10,9 +10,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def get_us_inflation_rate(start_year, end_year):
 
-    # Bureau of Labor Statistics API URL
-    url = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
-
     # CPI-U (All Items) - Seasonaly Adjusted
     series_id = ["CUSR0000SA0"]
 
@@ -24,11 +21,12 @@ def get_us_inflation_rate(start_year, end_year):
         "registrationkey": "66a24c4f75bb424692f67dedcfb3e6cb"  # Se não tiver, pode remover esta linha
     }
 
+    # Bureau of Labor Statistics API URL
+    url = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
         result = response.json()
-        
         dados = result["Results"]["series"][0]["data"]
         
     else:
