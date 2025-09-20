@@ -29,5 +29,24 @@ if not (actual_date in previous_df['Date'].values):
     df_currencies['Date'] = df_currencies['Date'].astype(str)
 
     df_currencies = pd.concat([previous_df, df_currencies], ignore_index=True)
+    df_currencies = df_currencies.drop_duplicates('Date').reset_index(drop=True)
+
+    dates_list = pd.date_range(start=previous_df['Date'].min(), end=previous_df['Date'].max(), freq="D").strftime("%Y-%m-%d").tolist()
+    dates_df = pd.DataFrame(dates_list, columns=['Date'])
+
+    df_currencies = pd.merge(df_currencies, dates_df, on='Date', how='right')
+
+    for i in df_currencies.index:
+
+        if ((pd.isna(df_currencies.loc[i, 'EURUSD=X'])) and (pd.isna(df_currencies.loc[i, 'EURGBP=X'])) and
+            (pd.isna(df_currencies.loc[i, 'GBPUSD=X'])) and (pd.isna(df_currencies.loc[i, 'GBPEUR=X'])) and
+            (pd.isna(df_currencies.loc[i, 'GBP=X'])) and (pd.isna(df_currencies.loc[i, 'EUR=X']))):
+
+            df_currencies.loc[i, 'EURUSD=X'] = df_currencies.loc[i - 1, 'EURUSD=X']
+            df_currencies.loc[i, 'EURGBP=X'] = df_currencies.loc[i - 1, 'EURGBP=X']
+            df_currencies.loc[i, 'GBPUSD=X'] = df_currencies.loc[i - 1, 'GBPUSD=X']
+            df_currencies.loc[i, 'GBPEUR=X'] = df_currencies.loc[i - 1, 'GBPEUR=X']
+            df_currencies.loc[i, 'GBP=X'] = df_currencies.loc[i - 1, 'GBP=X']
+            df_currencies.loc[i, 'EUR=X'] = df_currencies.loc[i - 1, 'EUR=X']
 
     df_currencies.to_csv(os.path.join(BASE_DIR, 'databases\Currencies Rate.csv'), sep=';', index=False)
