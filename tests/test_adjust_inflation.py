@@ -5,7 +5,7 @@ import pandas as pd
 
 client = TestClient(app)
 
-def test_BRL_adjust_inflation_route():
+def test_BRL_inflation_adjustment_route():
 
     data = {
         'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
@@ -13,7 +13,7 @@ def test_BRL_adjust_inflation_route():
         'currency': 'BRL',
         'present_date': '2025/01/01'
     }
-    response = client.post('/adjust_inflation', json=data)
+    response = client.post('/inflation_adjustment', json=data)
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
@@ -25,7 +25,7 @@ def test_BRL_adjust_inflation_route():
     assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
 
 
-def test_GBP_adjust_inflation_route():
+def test_GBP_inflation_adjustment_route():
 
     data = {
         'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
@@ -33,7 +33,7 @@ def test_GBP_adjust_inflation_route():
         'currency': 'GBP',
         'present_date': '2025/01/01'
     }
-    response = client.post('/adjust_inflation', json=data)
+    response = client.post('/inflation_adjustment', json=data)
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
@@ -45,7 +45,7 @@ def test_GBP_adjust_inflation_route():
     assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
 
 
-def test_USD_adjust_inflation_route():
+def test_USD_inflation_adjustment_route():
 
     data = {
         'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
@@ -53,7 +53,7 @@ def test_USD_adjust_inflation_route():
         'currency': 'USD',
         'present_date': '2025/01/01'
     }
-    response = client.post('/adjust_inflation', json=data)
+    response = client.post('/inflation_adjustment', json=data)
 
     assert response.status_code == status.HTTP_200_OK
     response_json = response.json()
