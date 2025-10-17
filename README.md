@@ -1,5 +1,7 @@
 # Financial Utilities API
 
+Link to the API: https://financial-utilities-api.onrender.com/docs
+
 ## :money_with_wings: Inflation Adjustment Route (POST)
 
 Receives time series monetary values and adjusts it by the CPI rate.
