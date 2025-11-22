@@ -31,7 +31,9 @@ if not (actual_date in previous_df['Date'].values):
     df_currencies = pd.concat([previous_df, df_currencies], ignore_index=True)
     df_currencies = df_currencies.drop_duplicates('Date').reset_index(drop=True)
 
-    dates_list = pd.date_range(start=previous_df['Date'].min(), end=previous_df['Date'].max(), freq="D").strftime("%Y-%m-%d").tolist()
+    actual_date = pd.to_datetime(datetime.now()).date()
+    
+    dates_list = pd.date_range(start=previous_df['Date'].min(), end=actual_date, freq="D").strftime("%Y-%m-%d").tolist()
     dates_df = pd.DataFrame(dates_list, columns=['Date'])
 
     df_currencies = pd.merge(df_currencies, dates_df, on='Date', how='right')
