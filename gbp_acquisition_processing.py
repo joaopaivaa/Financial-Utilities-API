@@ -13,8 +13,10 @@ if response.status_code == 200:
 
     df = pd.read_csv(StringIO(response.text))
 
-    df = df.loc[189:,]
+    months_filter = 'JAN|FEV|MAR|ABR|MAI|JUN|JUL|AGO|SET|OUT|NOV|DEZ'
+
     df.columns = ['Date', 'Monthly Inflation']
+    df = df[df['Date'].str.contains(months_filter, case=True, na=False)].reset_index(drop=True)
 
     df['Date'] = pd.to_datetime(df['Date'], format="%Y %b")
     df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for index in df.index]
