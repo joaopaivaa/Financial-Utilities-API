@@ -93,6 +93,6 @@ Receives 3 values between total amount, principal, interest rate and number of t
 
 And the missing one as output.
 
-## :link Access the API
+## :link: Access the API
 
 Link to the API: https://financial-utilities-api.onrender.com/docs
