@@ -42,6 +42,16 @@ df = pd.DataFrame(df_1 + df_2 + df_3)
 df = df.sort_values(by=['year', 'period']).reset_index(drop=True)
 
 df["year"] = df["year"].astype(int)
+
+if '-' in df['value'].values:
+
+    indexes = df[df["value"] == '-'].index
+    for index in indexes:
+        
+        previous_value = float(df.at[index - 1, 'value'])
+        next_value = float(df.at[index + 1, 'value'])
+        df.at[index, 'value'] = str(round((previous_value + next_value) / 2, 3))
+
 df["CPI Value"] = df["value"].astype(float)
 df["month"] = df["period"].str.extract("(\d+)").astype(int)
 df["Date"] = pd.to_datetime(df[["year", "month"]].assign(day=1))
