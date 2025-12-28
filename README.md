@@ -1,6 +1,12 @@
 # Financial Utilities API
 
-Link to the API: https://financial-utilities-api.onrender.com/docs
+Author: João Paiva.
+
+Contact: joaopaiva.datascience@gmail.com
+
+Github: https://github.com/joaopaivaa
+
+Portfolio: https://joaopaivaa.github.io/
 
 ## :money_with_wings: Inflation Adjustment Route (POST)
 
@@ -86,3 +92,7 @@ Receives 3 values between total amount, principal, interest rate and number of t
 - Number of time periods.
 
 And the missing one as output.
+
+## :link: Access the API
+
+Link to the API: https://financial-utilities-api.onrender.com/docs
