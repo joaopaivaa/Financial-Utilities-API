@@ -13,7 +13,7 @@ if response.status_code == 200:
 
     df = pd.read_csv(StringIO(response.text))
 
-    months_filter = 'JAN|FEV|MAR|ABR|MAI|JUN|JUL|AGO|SET|OUT|NOV|DEZ'
+    months_filter = 'JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC'
 
     df.columns = ['Date', 'Monthly Inflation']
     df = df[df['Date'].str.contains(months_filter, case=True, na=False)].reset_index(drop=True)
