@@ -11,7 +11,7 @@ def test_BRL_inflation_adjustment_route():
         'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
         'values': [100, 100, 100],
         'currency': 'BRL',
-        'present_date': '2025/01/01'
+        'present_date': '2025/11/01'
     }
     response = client.post('/inflation_adjustment', json=data)
 
@@ -31,7 +31,7 @@ def test_GBP_inflation_adjustment_route():
         'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
         'values': [100, 100, 100],
         'currency': 'GBP',
-        'present_date': '2025/01/01'
+        'present_date': '2025/11/01'
     }
     response = client.post('/inflation_adjustment', json=data)
 
@@ -51,7 +51,7 @@ def test_USD_inflation_adjustment_route():
         'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
         'values': [100, 100, 100],
         'currency': 'USD',
-        'present_date': '2025/01/01'
+        'present_date': '2025/11/01'
     }
     response = client.post('/inflation_adjustment', json=data)
 
