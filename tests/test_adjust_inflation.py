@@ -8,8 +8,8 @@ client = TestClient(app)
 def test_BRL_inflation_adjustment_route():
 
     data = {
-        'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
-        'values': [100, 100, 100],
+        'dates': ['2000/01/01', '2010/01/01', '2020/01/01', '2025/01/01'],
+        'values': [100] * 4,
         'currency': 'BRL',
         'present_date': '2025/11/01'
     }
@@ -22,14 +22,17 @@ def test_BRL_inflation_adjustment_route():
     df_response['Date'] = pd.to_datetime(df_response['Date'])
 
     assert len(df_response) > 0
-    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.92
+
+    # Reference: https://www3.bcb.gov.br/CALCIDADAO/publico/corrigirPorIndice.do?method=corrigirPorIndice
 
 
 def test_GBP_inflation_adjustment_route():
 
     data = {
-        'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
-        'values': [100, 100, 100],
+        'dates': ['2000/01/01', '2010/01/01', '2020/01/01', '2025/01/01'],
+        'values': [100] * 4,
         'currency': 'GBP',
         'present_date': '2025/11/01'
     }
@@ -42,14 +45,17 @@ def test_GBP_inflation_adjustment_route():
     df_response['Date'] = pd.to_datetime(df_response['Date'])
 
     assert len(df_response) > 0
-    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 102.92
+
+    # Reference: https://www.bankofengland.co.uk/monetary-policy/inflation/inflation-calculator
 
 
 def test_USD_inflation_adjustment_route():
 
     data = {
-        'dates': ['2000/01/01', '2010/01/01', '2020/01/01'],
-        'values': [100, 100, 100],
+        'dates': ['2000/01/01', '2010/01/01', '2020/01/01', '2025/01/01'],
+        'values': [100] * 4,
         'currency': 'USD',
         'present_date': '2025/11/01'
     }
@@ -62,4 +68,7 @@ def test_USD_inflation_adjustment_route():
     df_response['Date'] = pd.to_datetime(df_response['Date'])
 
     assert len(df_response) > 0
-    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 2025-01-01'])
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 102.03
+
+    # Reference: https://www.bls.gov/data/inflation_calculator.htm
