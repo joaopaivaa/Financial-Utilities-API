@@ -6,7 +6,7 @@ from io import StringIO
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-url = "https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/l522/mm23"
+url = "https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/d7bt/mm23"
 response = requests.get(url)
 
 if response.status_code == 200:
