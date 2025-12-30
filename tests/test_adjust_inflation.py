@@ -22,8 +22,8 @@ def test_BRL_inflation_adjustment_route():
     df_response['Date'] = pd.to_datetime(df_response['Date'])
 
     assert len(df_response) > 0
-    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
-    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.76
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value'])
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value'].values[0] == 103.76
 
     # Reference: https://sidra.ibge.gov.br/Tabela/1737
 
@@ -45,8 +45,8 @@ def test_GBP_inflation_adjustment_route():
     df_response['Date'] = pd.to_datetime(df_response['Date'])
 
     assert len(df_response) > 0
-    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
-    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.03
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value'])
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value'].values[0] == 103.03
 
     # Reference: https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23?referrer=search&searchTerm=d7bt
 
@@ -68,7 +68,7 @@ def test_USD_inflation_adjustment_route():
     df_response['Date'] = pd.to_datetime(df_response['Date'])
 
     assert len(df_response) > 0
-    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
-    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 102.03
+    assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value'])
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value'].values[0] == 102.03
 
     # Reference: https://data.bls.gov/timeseries/CUUR0000SA0
