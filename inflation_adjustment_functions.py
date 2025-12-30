@@ -31,8 +31,11 @@ def inflation_adjustment(dates:list[str], values:list[float], currency:Literal['
     df['Year Number'] = [int(datetime.strftime(df['Date'][index], format='%Y')) for index in df.index]
 
     present_date = pd.to_datetime(present_date)
+
+    present_value_cpi = df_monthly_ipca.loc[df_monthly_ipca['Date'] == present_date, 'CPI Value'].values[0]
+
     df_monthly_ipca_to_present_date = df_monthly_ipca[df_monthly_ipca['Date'] <= present_date].copy()
-    df_monthly_ipca_to_present_date['Accumulated Inflation'] = (1 + df_monthly_ipca_to_present_date['Monthly Inflation'])[::-1].cumprod()[::-1] - 1
+    df_monthly_ipca_to_present_date['Accumulated Inflation'] = (present_value_cpi / df_monthly_ipca_to_present_date['CPI Value']) - 1
 
     if present_date <= df_monthly_ipca_to_present_date['Date'].max() + pd.DateOffset(months=1):
         df = df[(df['Date'] >= df_monthly_ipca_to_present_date['Date'].min()) & (df['Date'] <= present_date)]
@@ -44,6 +47,12 @@ def inflation_adjustment(dates:list[str], values:list[float], currency:Literal['
     df[f'Adjusted Value - {present_date.month}/{present_date.year}'] = round(df['Value'] * (1 + df['Accumulated Inflation']), 2)
 
     df['Accumulated Inflation (%)'] = round(df['Accumulated Inflation'] * 100, 2)
-    df = df.drop(columns=['Monthly Inflation', 'Month Number', 'Year Number', 'Accumulated Inflation', 'Date_y'], axis=1)
+    df = df.drop(columns=['Monthly Inflation', 'Month Number', 'Year Number', 'Accumulated Inflation', 'Date_y', 'CPI Value'], axis=1)
 
     return df
+
+inflation_adjustment(
+    dates=['2000/01/01', '2010/01/01', '2020/01/01', '2025/01/01'],
+    values=[100] * 4,
+    currency='USD',
+    present_date='2025/11/01')
