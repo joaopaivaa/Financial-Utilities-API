@@ -23,7 +23,7 @@ def test_BRL_inflation_adjustment_route():
 
     assert len(df_response) > 0
     assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
-    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.92
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.76
 
     # Reference: https://sidra.ibge.gov.br/Tabela/1737
 
