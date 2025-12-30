@@ -47,12 +47,6 @@ def inflation_adjustment(dates:list[str], values:list[float], currency:Literal['
     df[f'Adjusted Value - {present_date.month}/{present_date.year}'] = round(df['Value'] * (1 + df['Accumulated Inflation']), 2)
 
     df['Accumulated Inflation (%)'] = round(df['Accumulated Inflation'] * 100, 2)
-    df = df.drop(columns=['Monthly Inflation', 'Month Number', 'Year Number', 'Accumulated Inflation', 'Date_y', 'CPI Value'], axis=1)
+    df = df.drop(columns=['Month Number', 'Year Number', 'Accumulated Inflation', 'Date_y', 'CPI Value'], axis=1)
 
     return df
-
-inflation_adjustment(
-    dates=['2000/01/01', '2010/01/01', '2020/01/01', '2025/01/01'],
-    values=[100] * 4,
-    currency='USD',
-    present_date='2025/11/01')
