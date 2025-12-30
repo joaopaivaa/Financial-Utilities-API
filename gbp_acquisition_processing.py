@@ -6,7 +6,7 @@ from io import StringIO
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-url = "https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/d7oe/mm23"
+url = "https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/l522/mm23"
 response = requests.get(url)
 
 if response.status_code == 200:
@@ -15,14 +15,12 @@ if response.status_code == 200:
 
     months_filter = 'JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC'
 
-    df.columns = ['Date', 'Monthly Inflation']
+    df.columns = ['Date', 'CPI Value']
     df = df[df['Date'].str.contains(months_filter, case=True, na=False)].reset_index(drop=True)
 
     df['Date'] = pd.to_datetime(df['Date'], format="%Y %b")
     df['Month Number'] = [int(datetime.strftime(df['Date'][index], format='%m')) for index in df.index]
     df['Year Number'] = [int(datetime.strftime(df['Date'][index], format='%Y')) for index in df.index]
-
-    df['Monthly Inflation'] = pd.to_numeric(df['Monthly Inflation']) / 100
 
     df.to_csv(BASE_DIR + '\databases\GBP Monthly Inflation.csv', index=False, encoding='utf-8')
 
