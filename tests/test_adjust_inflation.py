@@ -25,7 +25,7 @@ def test_BRL_inflation_adjustment_route():
     assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
     assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.92
 
-    # Reference: https://www3.bcb.gov.br/CALCIDADAO/publico/corrigirPorIndice.do?method=corrigirPorIndice
+    # Reference: https://sidra.ibge.gov.br/Tabela/1737
 
 
 def test_GBP_inflation_adjustment_route():
@@ -46,9 +46,9 @@ def test_GBP_inflation_adjustment_route():
 
     assert len(df_response) > 0
     assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
-    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 102.92
+    assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 103.03
 
-    # Reference: https://www.bankofengland.co.uk/monetary-policy/inflation/inflation-calculator
+    # Reference: https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23?referrer=search&searchTerm=d7bt
 
 
 def test_USD_inflation_adjustment_route():
@@ -71,4 +71,4 @@ def test_USD_inflation_adjustment_route():
     assert all(col in df_response.columns for col in ['Date', 'Value', 'Accumulated Inflation (%)', 'Adjusted Value - 11/2025'])
     assert df_response[df_response['Date'] == '2025-01-01']['Adjusted Value - 11/2025'].values[0] == 102.03
 
-    # Reference: https://www.bls.gov/data/inflation_calculator.htm
+    # Reference: https://data.bls.gov/timeseries/CUUR0000SA0
